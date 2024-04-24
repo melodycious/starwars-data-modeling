@@ -17,6 +17,9 @@ class User(Base):
     last_name = Column(String(250))
     email = Column(String(250))
 
+    def to_dict(self):
+        return {}
+
 
 class Planets(Base):
     __tablename__ = 'planets'
@@ -26,6 +29,9 @@ class Planets(Base):
     rotation_period = Column(Integer)
     gravity = Column(String(250))
     orbital_period = Column(Integer)
+
+    def to_dict(self):
+        return {}
 
 
 class People(Base):
@@ -39,14 +45,20 @@ class People(Base):
     birth_year = Column(String(250))
     gender = Column(String(250))
 
+    def to_dict(self):
+        return {}
+
 
 class FavoritePeople(Base):
     __tablename__ = 'favorite_people'
     ID = Column(Integer, primary_key=True)
     user_ID = Column(Integer, ForeignKey('user.ID'))
     user_relationship = relationship(User)
-    character_id = Column(Integer, ForeignKey('character.ID'))
+    character_id = Column(Integer, ForeignKey('people.ID'))
     character_relationship = relationship(People) 
+
+    def to_dict(self):
+        return {}
 
 
 class FavouritePlanets(Base):
